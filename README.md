@@ -26,17 +26,15 @@ has_one :street
 | product_name                           | string     | null: false                    |
 | product_description                    | text       | null: false                    |
 | category_id                            | integer    | null: false                    |
-| product_condition_id                   | integer  　| null: false                    |
+| product_condition_id                   | integer    | null: false                    |
 | shipping_charge_id                     | integer    | null: false                    |
 | delivery_area_id                       | integer    | null: false                    |
 | days_to_ship_id                        | integer    | null: false                    |
 | price                                  | integer    | null: false                    |
-| user_id                                | references | foreign_key: true              |
+| user                                   | references | foreign_key: true              |
 
 ### Association
 belongs_to :user
-has_one :purchase
-
 
 
 ## streets table
@@ -49,7 +47,7 @@ has_one :purchase
 | address         | string     | null: false       |
 | phone_number    | integer    | null: false       |
 | building        | string     |                   |
-
+| purchase        | references | foreign_key: true |
 ### Association
 belongs_to :purchase
 
