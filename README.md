@@ -34,6 +34,7 @@ has_many :purchases
 
 ### Association
 belongs_to :user
+has_one :purchase
 
 
 ## streets table
@@ -44,7 +45,7 @@ belongs_to :user
 | prefecture_id   | integer    | null: false       |
 | municipality    | string     | null: false       |
 | address         | string     | null: false       |
-| phone_number    | integer    | null: false       |
+| phone_number    | string     | null: false       |
 | building        | string     |                   |
 | purchase        | references | foreign_key: true |
 ### Association
