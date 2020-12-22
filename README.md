@@ -1,24 +1,65 @@
-# README
+# DB 設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users table
 
-Things you may want to cover:
+| Column             | Type                | Options                 |
+|--------------------|---------------------|-------------------------|
+| email              | string              | unique: true            |
+| password           | string              | null: false             |
+| family_name        | string              | null: false             |
+| first_name         | string              | null: false             |
+| family_name_kana   | string              | null: false             |
+| first_name_kana    | string              | null: false             |
+| birthday           | date                | null: false             |
+| nick_name          | string              | null: false             |
 
-* Ruby version
+### Association
+has_many :product
+has_many :purchase
+has_one :street
 
-* System dependencies
 
-* Configuration
+## products table
 
-* Database creation
+| Column                              | Type       | Options           |
+|-------------------------------------|------------|-------------------|
+| product_name                        | string     | null: false       |
+| image                               | text       | null: false       |
+| product_description                 | text       | null: false       |
+| category                            | references | null: false       |
+| product_condition                   | text     　| null: false       |
+| shipping_charges                    | string     | null: false       |
+| delivery_area                       | string     | null: false       |
+| days_to_ship                        | string     | null: false       |
+| price                               | integer    | null: false       |
+| user_id                             | references | foreign_key: true |
 
-* Database initialization
+### Association
+belongs_to :user
+has_one :purchase
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## streets table
 
-* ...
+| Column       | Type       | Options           |
+|--------------|------------|-------------------|
+| postal_code  | integer    | null: false       |
+| prefectures  | string     | null: false       |
+| municipality | string     | null: false       |
+| address      | string     | null: false       |
+| phone_number | integer    | null: false       |
+
+### Association
+belongs_to :user
+
+## purchases table
+
+| Column          | Type       | Options           |
+|-----------------|------------|-------------------|
+| buyer_id        | text       | null: false       |
+| Purchased_item  | references | null: false       |
+
+### Association
+belongs_to :user
+belongs_to :product
