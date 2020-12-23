@@ -14,18 +14,18 @@
 | nick_name          | string              | null: false                          |
 
 ### Association
-has_many :products
+has_many :items
 has_many :purchases
 
 
-## products table
+## items table
 
 | Column                                 | Type       | Options                        |
 |----------------------------------------|------------|--------------------------------|
-| product_name                           | string     | null: false                    |
-| product_description                    | text       | null: false                    |
+| item_name                              | string     | null: false                    |
+| item_description                       | text       | null: false                    |
 | category_id                            | integer    | null: false                    |
-| product_condition_id                   | integer    | null: false                    |
+| item_condition_id                      | integer    | null: false                    |
 | shipping_charge_id                     | integer    | null: false                    |
 | delivery_area_id                       | integer    | null: false                    |
 | days_to_ship_id                        | integer    | null: false                    |
@@ -56,9 +56,9 @@ belongs_to :purchase
 | Column          | Type       | Options           |
 |-----------------|------------|-------------------|
 | user            | references | null: false       |
-| product         | references | null: false       |
+| item            | references | null: false       |
 
 ### Association
 belongs_to :user
-belongs_to :product
+belongs_to :item
 has_one :street
