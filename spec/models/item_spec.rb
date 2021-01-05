@@ -35,7 +35,7 @@ context "異常系のテスト" do
   end
 
   it 'category_idの選択肢が1(--)であった場合は出品できない' do
-    @item.category_id = '1'
+    @item.category_id = 1
     @item.valid?
     expect(@item.errors[:category_id]).to include('must be other than 1')
   end
@@ -47,7 +47,7 @@ context "異常系のテスト" do
   end
 
   it 'shipping_charge_idの選択肢が1(--)であった場合は出品できない' do
-    @item.shipping_charge_id = '1'
+    @item.shipping_charge_id = 1
     @item.valid?
     expect(@item.errors[:shipping_charge_id]).to include('must be other than 1')
   end
@@ -59,7 +59,7 @@ context "異常系のテスト" do
   end
 
   it 'days_to_ship_idが1(--)であった場合は出品できない' do
-    @item.days_to_ship_id = '1'
+    @item.days_to_ship_id = 1
     @item.valid?
     expect(@item.errors[:days_to_ship_id]).to include('must be other than 1')
   end
@@ -71,7 +71,7 @@ context "異常系のテスト" do
   end
 
   it 'delivery_area_idが1(--)であった場合は出品できない' do
-    @item.delivery_area_id = '1'
+    @item.delivery_area_id = 1
     @item.valid?
     expect(@item.errors[:delivery_area_id]).to include('must be other than 1')
   end
@@ -83,7 +83,7 @@ context "異常系のテスト" do
   end
 
   it 'item_condition_idが1(--)であった場合は出品できない' do
-    @item.item_condition_id = '1'
+    @item.item_condition_id = 1
     @item.valid?
     expect(@item.errors[:item_condition_id]).to include('must be other than 1')
   end
@@ -95,7 +95,7 @@ context "異常系のテスト" do
   end
 
   it '販売価格は半角数字以外では登録できないこと' do
-    @item.price = '１００００'
+    @item.price = １００００
     @item.valid?
     expect(@item.errors[:price]).to include('is not a number')
   end
@@ -107,13 +107,13 @@ context "異常系のテスト" do
   end
 
   it '価格の範囲が、¥300-¥9,999,999の間であること' do
-     @item.price = '299'
+     @item.price = 299
      @item.valid?
      expect(@item.errors[:price]).to include("must be greater than or equal to 300")
   end
 
   it '価格の範囲が、¥300-¥9,999,999の間であること' do
-    @item.price = '10000000'
+    @item.price = 10000000
     @item.valid?
     expect(@item.errors[:price]).to include("must be less than 9999999")
   end
