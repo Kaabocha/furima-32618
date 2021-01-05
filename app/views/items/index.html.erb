@@ -130,9 +130,10 @@
       <li class='list'>
       <%= link_to items_path do %>
         <div class='item-img-content'>
-        <% @items.each do |item| %>
+      <%# @items.each do |item| %>
             <div class="content_post" style="background-image: url(<%= item.image %>);">
-          <%= image_tag @items.first.image, class: "item-img" %>
+             <%= image_tag "item-sample.png", class: "item-img" %>
+          <%#= image_tag @items.second.image, class: "item-img" %>
           <%# 商品が売れていればsold outを表示しましょう %>
           <div class='sold-out'>
             <span>Sold Out!!</span>
