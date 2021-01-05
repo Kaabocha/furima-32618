@@ -11,7 +11,6 @@ describe '#create' do
   
   context "正常系のテスト" do
   it '必要な情報を適切に入力すると、商品の出品ができること' do
-    @item = build(:item)
     expect(@item).to be_valid
   end
   end
