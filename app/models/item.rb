@@ -25,9 +25,11 @@ class Item < ApplicationRecord
   end
 
   # ジャンルの選択が「--」の時は保存できないようにする
-  validates :category_id, numericality: { other_than: 1 }
-  validates :days_to_ship_id, numericality: { other_than: 1 }
-  validates :delivery_area_id, numericality: { other_than: 1 }
-  validates :item_condition_id, numericality: { other_than: 1 }
-  validates :shipping_charge_id, numericality: { other_than: 1 }
+  with_options numericality: { other_than: 1 } do
+    validates :category_id
+    validates :days_to_ship_id
+    validates :delivery_area_id
+    validates :item_condition_id
+    validates :shipping_charge_id
+  end
 end
