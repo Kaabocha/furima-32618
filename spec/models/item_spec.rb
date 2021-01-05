@@ -8,7 +8,15 @@ describe '#create' do
   before do
     @item = FactoryBot.build(:item)
   end
+  
+  context "正常系のテスト" do
+  it '必要な情報を適切に入力すると、商品の出品ができること' do
+    @item = build(:item)
+    expect(@item).to be_valid
+  end
+  end
 
+context "異常系のテスト" do
   it 'item_nameが存在しないと出品できない' do
     @item.item_name = nil
     @item.valid?
@@ -99,11 +107,16 @@ describe '#create' do
     expect(@item.errors[:image]).to include("can't be blank")
   end
 
-  it '価格の範囲が、¥300-¥9,999,999の間であること' do # テストコード書く
+  it '価格の範囲が、¥300-¥9,999,999の間であること' do
+     @item.price = '299'
+     @item.valid?
+     expect(@item.errors[:price]).to include("must be greater than or equal to 300")
   end
 
-  it '必要な情報を適切に入力すると、商品の出品ができること' do
-    @item = build(:item)
-    expect(@item).to be_valid
+  it '価格の範囲が、¥300-¥9,999,999の間であること' do
+    @item.price = '10000000'
+    @item.valid?
+    expect(@item.errors[:price]).to include("must be less than 9999999")
   end
+end
 end
