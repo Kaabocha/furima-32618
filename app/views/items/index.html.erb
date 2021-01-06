@@ -134,12 +134,13 @@
        <%= image_tag item.image, class: "item-img" %> 
 
           <%# 商品が売れていればsold outを表示しましょう %>
-          <% if item.purchase.present? %>
-          <% item.image %>
-          <% Sold Out!! %>
-          <% item.item_name %>
-          <% item.price %>
-          <% end %>
+          <%# <% if item.purchase.present? %>
+          <%# あとでやります %>
+          <%# <% item.image %> 
+          <%# <% Sold Out!! %> 
+          <%# <% item.item_name %> 
+          <%# <% item.price %> 
+          <%# <% end %> 
           <div class='sold-out'>
             <span>Sold Out!!</span>
           </div>
