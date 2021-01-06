@@ -23,9 +23,17 @@ class ItemsController < ApplicationController
   end
 
   # def edit
+    # @item = Item.find(params[:id]) (編集機能の手順3)の際にコメントアウトを削除する
+  # end
+
+  # def update
+  #   item = Item.find(params[:id]) (編集機能の手順6)の際にコメントアウトを削除する
+  #   item.update(tweet_params)
   # end
 
   # def destroy
+    # item = Item.find(params[:id]) (削除機能の手順3)の際にコメントアウトを削除する
+    # item.destroy
   # end
 
   private
