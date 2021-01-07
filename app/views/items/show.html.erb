@@ -16,7 +16,7 @@
     </div>
     <div class="item-price-box">
       <span class="item-price">
-        ¥ 999,999,999
+        ¥<%= @item.price %>
       </span>
       <span class="item-postage">
         <%= @item.shipping_charge.name %>
@@ -36,7 +36,7 @@
     <%# //商品が売れていない場合はこちらを表示しましょう %>
 
     <div class="item-explain-box">
-      <span><%= "商品説明" %></span>
+      <span><%= @item.item_description %></span>
     </div>
     <table class="detail-table">
       <tbody>
