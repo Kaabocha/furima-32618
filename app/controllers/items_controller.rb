@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @items = Item.includes(:user).order("created_at DESC") 
@@ -17,6 +17,24 @@ class ItemsController < ApplicationController
       render :new
     end
   end
+
+  def show
+    @item = Item.find(params[:id])
+  end
+
+  # def edit
+    # @item = Item.find(params[:id]) (編集機能の手順3)の際にコメントアウトを削除する
+  # end
+
+  # def update
+  #   item = Item.find(params[:id]) (編集機能の手順6)の際にコメントアウトを削除する
+  #   item.update(tweet_params)
+  # end
+
+  # def destroy
+    # item = Item.find(params[:id]) (削除機能の手順3)の際にコメントアウトを削除する
+    # item.destroy
+  # end
 
   private
 
