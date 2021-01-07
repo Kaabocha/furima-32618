@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_item, only: [:edit, :update, :show]
+  before_action :set_item, only: [:edit, :update, :show, :destroy]
   def index
     @items = Item.includes(:user).order("created_at DESC") 
   end
@@ -35,10 +35,15 @@ class ItemsController < ApplicationController
     end
   end
 
-  # def destroy
-    # item = Item.find(params[:id]) (削除機能の手順3)の際にコメントアウトを削除する
-    # item.destroy
-  # end
+  def destroy
+    if current_user.id == @item.user_id
+      if @item.destroy
+       redirect_to root_path
+      else
+       render :show
+      end
+    end
+  end
 
   private
 
