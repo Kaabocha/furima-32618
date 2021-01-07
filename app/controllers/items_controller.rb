@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-
+  before_action :set_item, only: [:edit, :update, :show]
   def index
     @items = Item.includes(:user).order("created_at DESC") 
   end
@@ -19,17 +19,21 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
-  # def edit
-    # @item = Item.find(params[:id]) (編集機能の手順3)の際にコメントアウトを削除する
-  # end
+  def edit
+    if current_user.id != @item.user_id  
+       return redirect_to root_path
+    end
+  end
 
-  # def update
-  #   item = Item.find(params[:id]) (編集機能の手順6)の際にコメントアウトを削除する
-  #   item.update(tweet_params)
-  # end
+  def update
+    if current_user.id == @item.user_id 
+      @item.update(item_params)
+      return redirect_to item_path if @item.valid?
+      render :edit
+    end
+  end
 
   # def destroy
     # item = Item.find(params[:id]) (削除機能の手順3)の際にコメントアウトを削除する
@@ -38,10 +42,15 @@ class ItemsController < ApplicationController
 
   private
 
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
   def item_params
     params.require(:item).permit(
       :item_name, :item_description, :category_id, :item_condition_id,
       :shipping_charge_id, :delivery_area_id, :days_to_ship_id, :price, :image
     ).merge(user_id: current_user.id)
   end
+
 end
