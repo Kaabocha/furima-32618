@@ -6,7 +6,7 @@ class Item < ApplicationRecord
   belongs_to :item_condition
   belongs_to :shipping_charge
   belongs_to :user
-  has_one :purchase
+  has_one :order
   has_one_attached :image
 
   # 空の投稿を保存できないようにする
