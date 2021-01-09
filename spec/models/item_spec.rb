@@ -95,7 +95,7 @@ context "異常系のテスト" do
   end
 
   it '販売価格は半角数字以外では登録できないこと' do
-    @item.price = １００００
+    @item.price = "１００００"
     @item.valid?
     expect(@item.errors[:price]).to include('is not a number')
   end
