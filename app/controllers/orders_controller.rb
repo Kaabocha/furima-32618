@@ -1,7 +1,11 @@
 class OrdersController < ApplicationController
+  before_action :set_item, only: [:index, :create]
 
   def index
-    @item = Item.find(params[:item_id])
+    # binding.pry
+    if current_user.id == @item.user_id || @item.order.present? 
+      return redirect_to root_path
+    end
     @orderstreet = OrderStreet.new
   end
 
@@ -18,16 +22,21 @@ class OrdersController < ApplicationController
       @orderstreet.save
       return redirect_to root_path
     else
-      @item = Item.find(params[:item_id])
       render 'index'
     end
   end
 
+
   private
+
+  def set_item
+    @item = Item.find(params[:item_id])       #各アクションの記述をbefore_actionでDRY化
+  end
 
   def order_params
     params.require(:order_street).permit(:postal_code, :delivery_area_id, :municipality, :address, :phone_number, :building,)
       .merge(token: params[:token], user_id: current_user.id, item_id: params[:item_id ]) #ここのcurrent_user.idが使えるのはdeviseのGemを導入しているからです。
   end
+
 end
 
