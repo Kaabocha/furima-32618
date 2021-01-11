@@ -9,11 +9,11 @@ describe '#create' do
     @item = FactoryBot.build(:item)
   end
   
-  context "正常系のテスト" do
+context "正常系のテスト" do
   it '必要な情報を適切に入力すると、商品の出品ができること' do
     expect(@item).to be_valid
   end
-  end
+end  
 
 context "異常系のテスト" do
   it 'item_nameが存在しないと出品できない' do
@@ -117,5 +117,6 @@ context "異常系のテスト" do
     @item.valid?
     expect(@item.errors[:price]).to include("must be less than 9999999")
   end
+  
 end
 end
