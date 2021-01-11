@@ -5,5 +5,6 @@ FactoryBot.define do
     municipality                     { "横浜市美浜区" }
     address                          { "柳ビル101" }
     phone_number                     { "09012345678" }
+    token                            { "testtest" }
   end
 end
