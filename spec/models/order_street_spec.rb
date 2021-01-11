@@ -77,5 +77,16 @@ RSpec.describe OrderStreet, type: :model do
       expect(@orderstreet.errors[:token]).to include("can't be blank")
     end
 
+    it 'delivery_area_idが1(--)であった場合は出品できない' do
+      @orderstreet.delivery_area_id = 1
+      @orderstreet.valid?
+      expect(@orderstreet.errors[:delivery_area_id]).to include('must be other than 1')
+    end
+
+    it 'building（建物情報）がなくても登録できること' do
+      @orderstreet.building = nil
+      @orderstreet.valid?
+    end
+
   end
 end
