@@ -58,5 +58,12 @@ RSpec.describe OrderStreet, type: :model do
       @orderstreet.valid?
       expect(@orderstreet.errors[:phone_number]).to include("is invalid")
     end
+
+    it 'トークンが生成されなかった場合は、カード決済ができないこと' do
+      @orderstreet.token = nil
+      @orderstreet.valid?
+      expect(@orderstreet.errors[:token]).to include("can't be blank")
+    end
+
   end
 end
