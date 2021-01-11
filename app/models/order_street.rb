@@ -1,7 +1,7 @@
 class OrderStreet
 
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :delivery_area_id, :municipality, :address, :phone_number, :building, :order_id, :hoge
+  attr_accessor :user_id, :item_id, :postal_code, :delivery_area_id, :municipality, :address, :phone_number, :building, :order_id, :token
 
   with_options presence: true do
     validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" } #郵便番号
@@ -9,6 +9,7 @@ class OrderStreet
     validates :municipality     #市区町村
     validates :address          #番地
     validates :phone_number, format: { with: /\A\d{10,11}\z/ }   #電話番号
+    validates :token
   end
 
   def save
