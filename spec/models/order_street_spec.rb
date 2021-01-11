@@ -1,16 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe OrderStreet, type: :model do
+  
   describe '購入情報の保存' do
     before do
       @orderstreet = FactoryBot.build(:order_street)
     end
   
+  context "正常系のテスト" do
+
     it '必要な情報を適切に入力すると、商品の購入ができること' do
       @orderstreet = build(:order_street)
       expect(@orderstreet).to be_valid
     end
 
+    it 'building（建物情報）がなくても登録できること' do
+      @orderstreet.building = nil
+      @orderstreet.valid?
+    end
+
+  end
+  
+  context "異常系のテスト" do
+  
     it '郵便番号(postal_code)が必須であること' do
       @orderstreet.postal_code = nil
       @orderstreet.valid?
@@ -83,10 +95,6 @@ RSpec.describe OrderStreet, type: :model do
       expect(@orderstreet.errors[:delivery_area_id]).to include('must be other than 1')
     end
 
-    it 'building（建物情報）がなくても登録できること' do
-      @orderstreet.building = nil
-      @orderstreet.valid?
-    end
-
   end
+
 end
